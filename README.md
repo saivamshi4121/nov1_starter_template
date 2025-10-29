@@ -8,6 +8,8 @@ The goal is to give students a minimal, working example in both a web environmen
 
 **🚨 The backend endpoint : https://ai-image-generation-backend-ixhr.onrender.com**
 
+**🚨 For the live website checkout here  : dreamcanvas.stackhaus.dev**
+
 ## 🚀 Getting Started
 
 This kit includes two main examples:
