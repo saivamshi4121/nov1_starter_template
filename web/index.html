@@ -57,13 +57,13 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-top: 15px;
-            display: none; /* Hide until an image is loaded */
+            display: none; 
         }
         .status {
             margin-top: 10px;
             color: #666;
             font-style: italic;
-            min-height: 20px; /* To prevent layout shift */
+            min-height: 20px; 
         }
     </style>
 </head>
@@ -71,10 +71,10 @@
     <div class="container">
         <h1>Dream Canvas - powered by saivamshi</h1>
         
-        <!-- Input field for the prompt -->
+       
         <input type="text" id="prompt" placeholder="Describe the image you want to create (e.g., 'A cat wearing a top hat on the moon')" />
         
-        <!-- Button to trigger the generation -->
+      
         <button onclick="generate()">Generate Image</button>
         
         <div class="result-area">
@@ -85,13 +85,11 @@
     </div>
 
     <script>
-        // =================================================================================================
-        // STEP 1: REPLACE THIS WITH YOUR ACTUAL BACKEND ENDPOINT
-        // The user provided this example endpoint:
-        const API_ENDPOINT = "https://ai-image-generation-backend-ixhr.onrender.com"; 
+        
+        const API_ENDPOINT = "insert your endpoint here from readme"; 
         // =================================================================================================
 
-        // Function to handle the image generation process
+       
         async function generate() {
             const promptInput = document.getElementById('prompt');
             const resultImage = document.getElementById('result-image');
@@ -104,49 +102,48 @@
                 return;
             }
 
-            // 1. Update status to show loading
+       
             statusText.textContent = "Generating image... please wait. (This might take a few moments)";
-            resultImage.style.display = 'none'; // Hide old image
-            resultImage.src = ""; // Clear old image source
+            resultImage.style.display = 'none'; 
+            resultImage.src = ""; 
 
             try {
                 // 2. Prepare the request
                 const requestBody = { prompt: prompt };
                 
-                // 3. Make the API call using the 'fetch' function
+                
                 const response = await fetch(API_ENDPOINT, {
                     method: "POST",
                     headers: { 
                         "Content-Type": "application/json" 
                     },
-                    // Convert the JavaScript object to a JSON string for the body
+                    
                     body: JSON.stringify(requestBody)
                 });
 
-                // 4. Check if the request was successful
+                
                 if (!response.ok) {
-                    // If the response status is not 200-299, throw an error
+                    
                     throw new Error(`HTTP error! Status: ${response.status}. Response text: ${await response.text()}`);
                 }
 
-                // 5. Parse the JSON response
+            
                 const data = await response.json();
 
-                // 6. Check if the response contains the image data (assuming the key is 'photo')
+                
                 if (data.photo) {
-                    // The 'data.photo' is a Base64 encoded string of the image.
-                    // We set the <img> tag's source (src) to display it.
+                    
                     resultImage.src = "data:image/jpeg;base64," + data.photo;
                     resultImage.alt = "Generated image for: " + prompt;
                     resultImage.style.display = 'block'; // Show the new image
                     statusText.textContent = "Image generated successfully! (Open this file in VS Code with Live Server)";
                 } else {
-                    // Handle case where API returns success but no expected data
+                    
                     statusText.textContent = "Generation failed: API response was successful but did not contain the expected 'photo' data.";
                 }
 
             } catch (error) {
-                // 7. Handle any errors during the process (network issues, JSON parsing errors, etc.)
+               
                 console.error("Error during image generation:", error);
                 statusText.textContent = `An error occurred: ${error.message}. Check the console (F12) for technical details.`;
                 resultImage.style.display = 'none';

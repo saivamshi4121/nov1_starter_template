@@ -6,6 +6,8 @@ The goal is to give students a minimal, working example in both a web environmen
 
 **🚨 IMPORTANT: You MUST replace the placeholder API endpoint with your own backend service URL before use.**
 
+**🚨 The backend endpoint : https://ai-image-generation-backend-ixhr.onrender.com**
+
 ## 🚀 Getting Started
 
 This kit includes two main examples:
